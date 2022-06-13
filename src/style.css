@@ -1,0 +1,256 @@
+@import url(palette.css);
+html {
+  color: #0d0c1d;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  height: 100vh;
+  background-color: var(--beige);
+}
+
+.header {
+  background-color: #0d0c1d;
+  color: var(--beige);
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 2vmin;
+}
+
+.column {
+  float: left;
+  align-items: center;
+  text-align: center;
+}
+
+.column.side {
+  width: 25%;
+}
+
+.column.main {
+  width: 75%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (max-width: 600px) {
+  .column.side,
+  .column.main {
+    width: 100%;
+  }
+}
+
+.restart-button,
+.next-button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #0d0c1d;
+  border: none;
+  color: var(--beige);
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  width: 110px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.restart-button span,
+.next-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.restart-button span:after,
+.next-button span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -18px;
+  transition: 0.5s;
+}
+
+.restart-button:hover span,
+.next-button:hover span {
+  padding-right: 12px;
+}
+
+.restart-button:hover span:after,
+.next-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.next-button {
+  width: 120px;
+}
+
+.current {
+  text-align: center;
+  background-color: #0d0c1d;
+  font-size: 20px;
+  border-radius: 4px;
+  margin: 5px auto;
+  width: 150px;
+}
+
+.current p,
+.current span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.current p {
+  color: var(--beige);
+  font-size: 18px;
+  height: 20px;
+  margin: 0;
+  border: 0;
+  padding: 5px;
+}
+
+.current span {
+  background-color: #a69cac;
+  font-size: 60px;
+  height: 70px;
+}
+
+.last-5-container {
+  background-color: #0d0c1d;
+  border-radius: 4px;
+  width: 150px;
+  font-size: 12px;
+  margin: 5px auto;
+  padding: 1px;
+}
+
+.last-title {
+  color: var(--beige);
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.last-5 {
+  display: flex;
+  flex-direction: row;
+}
+
+.last {
+  background-color: #a69cac;
+  width: 30px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1px;
+}
+
+.last:last-child {
+  background-color: #474973;
+  color: var(--beige);
+}
+
+.total-container {
+  display: flex;
+  align-content: flex-end;
+  background-color: #0d0c1d;
+  font-size: 12px;
+  width: 150px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  border-radius: 4px;
+  padding: 1px;
+}
+
+.total-container p {
+  color: var(--beige);
+  width: 80%;
+  height: 20px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.total-number {
+  background-color: #a69cac;
+  width: 20%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin: 1px;
+}
+
+.grid-container,
+.tile-container {
+  --grid-rows: 9;
+  --grid-cols: 10;
+  --cell-width: 30px;
+  --cell-height: 20px;
+  --cell-gap: 3px;
+  font-size: 17px;
+  display: grid;
+  grid-template-columns: repeat(10, auto);
+  gap: 3px;
+  padding: 3px;
+}
+
+.grid-container {
+  background-color: #0d0c1d;
+  position: absolute;
+}
+
+.grid-cell,
+.tile {
+  min-width: var(--cell-width);
+  min-height: var(--cell-height);
+  border-radius: 2px;
+}
+
+.grid-cell {
+  background-color: #161b33;
+}
+
+.tile-container {
+  position: relative;
+}
+
+.tile {
+  --x: 1;
+  --y: 0;
+  position: absolute;
+  top: calc(
+    var(--y) * (var(--cell-height) + var(--cell-gap)) + var(--cell-gap)
+  );
+  left: calc(
+    var(--x) * (var(--cell-width) + var(--cell-gap)) + var(--cell-gap)
+  );
+  font-weight: bold;
+  background-color: var(--beige);
+  animation: show 200ms ease-in-out;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+}
