@@ -15,7 +15,7 @@ class AppManager {
   next() {
     const i = this.grid.randomAvailableCell();
     if (!!i) {
-      const t = this.grid.getCellByIndex(i)[0];
+      const t = this.grid.getCellByIndex()[0];
       this.actuator.updateTotal((this.total = this.grid.addCell(t)));
       this.actuator.addCell(t);
       this.actuator.updateDisplay(this.grid.cells.added);
@@ -76,13 +76,20 @@ class Grid {
     };
   }
   randomAvailableCell() {
-    let e = this.cells.available.length;
-    if (e) {
-      return Math.floor(Math.random() * e);
+    const arr = this.cells.available;
+    const arrL = arr.length;
+    if (arrL) {
+      for (let i = arrL - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * i);
+        let k = arr[i];
+        arr[i] = arr[j];
+        arr[j] = k;
+      }
     }
+    return arrL;
   }
-  getCellByIndex(e) {
-    return this.cells.available.splice(e, 1);
+  getCellByIndex() {
+    return this.cells.available.splice(0, 1);
   }
   addCell(e) {
     return this.cells.added.unshift(e);
@@ -100,8 +107,8 @@ class HTMLActuator {
     const i = this;
     window.requestAnimationFrame(() => {
       i.clearContainer(i.tileContainer);
-      e.cells.added.forEach((e) => {
-        e && i.addCell(e);
+      e.cells.added.forEach((n) => {
+        n && i.addCell(n);
       });
       i.updateTotal(t.total);
       i.clearContainer(i.currentNumber);
